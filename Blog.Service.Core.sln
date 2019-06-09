@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Service.Core", "Blog.Core\Blog.Service.Core.csproj", "{48754109-94E4-4D10-864D-D493C21E7207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Service.Core", "Blog.Service.Core\Blog.Service.Core.csproj", "{48754109-94E4-4D10-864D-D493C21E7207}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A3C8110-1404-465C-BC4A-6A09E841338B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitigonre. = .gitigonre.
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
