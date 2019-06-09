@@ -1,0 +1,14 @@
+G:\dev\Core\Blog.Core\Blog.Core\bin\Debug\netcoreapp2.2\Blog.Service.Core.deps.json
+G:\dev\Core\Blog.Core\Blog.Core\bin\Debug\netcoreapp2.2\Blog.Service.Core.runtimeconfig.json
+G:\dev\Core\Blog.Core\Blog.Core\bin\Debug\netcoreapp2.2\Blog.Service.Core.runtimeconfig.dev.json
+G:\dev\Core\Blog.Core\Blog.Core\bin\Debug\netcoreapp2.2\Blog.Service.Core.dll
+G:\dev\Core\Blog.Core\Blog.Core\bin\Debug\netcoreapp2.2\Blog.Service.Core.pdb
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.csprojAssemblyReference.cache
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.csproj.CoreCompileInputs.cache
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.RazorAssemblyInfo.cache
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.RazorAssemblyInfo.cs
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.AssemblyInfoInputs.cache
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.AssemblyInfo.cs
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.RazorTargetAssemblyInfo.cache
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.dll
+G:\dev\Core\Blog.Core\Blog.Core\obj\Debug\netcoreapp2.2\Blog.Service.Core.pdb
