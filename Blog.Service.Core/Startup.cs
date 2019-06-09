@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Blog.Service.Core
@@ -35,6 +38,12 @@ namespace Blog.Service.Core
                     TermsOfService = "NONE",
                     Contact = new Contact() { Name = "Blog.Core", Email = "337646685@qq.com", Url = "待定" }
                 });
+
+                // 增加Swagger 文档api说明支持
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, "Blog.Service.Core.xml");
+                Console.WriteLine(xmlPath);
+                c.IncludeXmlComments(xmlPath, true); //默认第二个参数是false 是控制器的注释
             });
 #endif
 
@@ -56,13 +65,23 @@ namespace Blog.Service.Core
 
             #region Swagger 中间件启用
 
-#if DEBUG
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
+                //Todo 无法获取版本暂时写死
+                //typeof(Apiversions).GetEnumNames().OrderByDescending(d => d).ToList().ForEach(version =>
+                //  {
+                //      c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"版本{version}");
+                //  });
+
+                ////写死的swagger首页
+                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "ApiHelp V1");
+                //c.RoutePrefix = "";//路径配置，设置为空，表示直接访问该文件，
+                ////这个时候去launchSettings.json中把"launchUrl": "swagger/index.html"去掉， 然后直接访问localhost:8001/index.html即可
+                //c.IndexStream = () =>
+                //    GetType().GetTypeInfo().Assembly.GetManifestResourceStream("Blog.Service.Code.index.html");
+                c.RoutePrefix = "";//路径配置，设置为空，表示直接访问该文件，
             });
-#endif
 
             #endregion Swagger 中间件启用
 

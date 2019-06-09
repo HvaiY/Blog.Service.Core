@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Blog.Service.Core.Controllers
 {
+    //[ApiVersion("v1")]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
