@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using Blog.Service.Core.AuthHelper.OverWrite;
 
 namespace Blog.Service.Core
 {
@@ -28,6 +30,7 @@ namespace Blog.Service.Core
 
             // 设置 apiVersion
             services.AddApiVersioning(option => option.ReportApiVersions = true);
+
             #region Swagger 服务配置
 
             // 获取安装 Swashbuckle.AspNetCore 包
@@ -48,6 +51,21 @@ namespace Blog.Service.Core
                 var xmlPath = Path.Combine(basePath, "Blog.Service.Core.xml");
                 Console.WriteLine(xmlPath);
                 c.IncludeXmlComments(xmlPath, true); //默认第二个参数是false 是控制器的注释
+
+                #region Token绑定到服务
+
+                var security = new Dictionary<string, IEnumerable<string>> { { "Blog.Service.Core", new string[] { } }, };
+                c.AddSecurityRequirement(security);
+                //方案名称“Blog.Core”可自定义，上下一致即可  Swagger 上可以看到授权的按钮了
+                c.AddSecurityDefinition("Blog.Service.Core", new ApiKeyScheme()
+                {
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    Name = "Authorization",//jwt默认的参数名称
+                    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
+                    Type = "apiKey"
+                });
+
+                #endregion Token绑定到服务
             });
 
             //注册服务 Swagger 使用
@@ -63,6 +81,18 @@ namespace Blog.Service.Core
 #endif
 
             #endregion Swagger 服务配置
+
+            #region Jwt授权
+
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("Client", policy => policy.RequireRole("Client").Build());
+                option.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
+                //一个接口对应多个角色的策略
+                option.AddPolicy("SysOrAdmin", policy => policy.RequireRole("Admin", "Client"));
+            });
+
+            #endregion Jwt授权
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +113,6 @@ namespace Blog.Service.Core
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-
                 //Todo 无法获取版本暂时写死
                 foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
                 {
@@ -99,6 +128,9 @@ namespace Blog.Service.Core
             });
 
             #endregion Swagger 中间件启用
+
+            //自定义认证中间件
+            app.UseJwtTokenAuth();
 
             app.UseHttpsRedirection();
             app.UseMvc();

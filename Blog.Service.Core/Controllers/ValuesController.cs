@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
+using Blog.Service.Core.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Service.Core.Controllers
 {
@@ -9,13 +12,14 @@ namespace Blog.Service.Core.Controllers
     public class ValuesController : ControllerBase
     {
         /// <summary>
-        /// GET api/values
+        /// 获取输入的值
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Authorize(Policy = "Admin")] //使用该策略可以使得这个api有两个角色
+        public ActionResult<IEnumerable<string>> Get([FromQuery]CodeName input)
         {
-            return new string[] { "value1", "value2" };
+            return new[] { $"Code:{input.Code}", $"Name:{input.Name}" };
         }
 
         // GET api/values/5
